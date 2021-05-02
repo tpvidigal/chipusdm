@@ -1,0 +1,661 @@
+%% bare_conf_compsoc.tex
+%% V1.4a
+%% 2014/09/17
+%% by Michael Shell
+%% See:
+%% http://www.michaelshell.org/
+%% for current contact information.
+%%
+%% This is a skeleton file demonstrating the use of IEEEtran.cls
+%% (requires IEEEtran.cls version 1.8s or later) with an IEEE Computer
+%% Society conference paper.
+%%
+%% Support sites:
+%% http://www.michaelshell.org/tex/ieeetran/
+%% http://www.ctan.org/tex-archive/macros/latex/contrib/IEEEtran/
+%% and
+%% http://www.ieee.org/
+
+%%*************************************************************************
+%% Legal Notice:
+%% This code is offered as-is without any warranty either expressed or
+%% implied; without even the implied warranty of MERCHANTABILITY or
+%% FITNESS FOR A PARTICULAR PURPOSE! 
+%% User assumes all risk.
+%% In no event shall IEEE or any contributor to this code be liable for
+%% any damages or losses, including, but not limited to, incidental,
+%% consequential, or any other damages, resulting from the use or misuse
+%% of any information contained here.
+%%
+%% All comments are the opinions of their respective authors and are not
+%% necessarily endorsed by the IEEE.
+%%
+%% This work is distributed under the LaTeX Project Public License (LPPL)
+%% ( http://www.latex-project.org/ ) version 1.3, and may be freely used,
+%% distributed and modified. A copy of the LPPL, version 1.3, is included
+%% in the base LaTeX documentation of all distributions of LaTeX released
+%% 2003/12/01 or later.
+%% Retain all contribution notices and credits.
+%% ** Modified files should be clearly indicated as such, including  **
+%% ** renaming them and changing author support contact information. **
+%%
+%% File list of work: IEEEtran.cls, IEEEtran_HOWTO.pdf, bare_adv.tex,
+%%                    bare_conf.tex, bare_jrnl.tex, bare_conf_compsoc.tex,
+%%                    bare_jrnl_compsoc.tex, bare_jrnl_transmag.tex
+%%*************************************************************************
+
+
+% *** Authors should verify (and, if needed, correct) their LaTeX system  ***
+% *** with the testflow diagnostic prior to trusting their LaTeX platform ***
+% *** with production work. IEEE's font choices and paper sizes can       ***
+% *** trigger bugs that do not appear when using other class files.       ***                          ***
+% The testflow support page is at:
+% http://www.michaelshell.org/tex/testflow/
+
+
+
+\documentclass[conference,compsoc]{IEEEtran}
+% Some/most Computer Society conferences require the compsoc mode option,
+% but others may want the standard conference format.
+%
+% If IEEEtran.cls has not been installed into the LaTeX system files,
+% manually specify the path to it like:
+% \documentclass[conference,compsoc]{../sty/IEEEtran}
+
+
+
+
+
+% Some very useful LaTeX packages include:
+% (uncomment the ones you want to load)
+
+
+% *** MISC UTILITY PACKAGES ***
+%
+%\usepackage{ifpdf}
+% Heiko Oberdiek's ifpdf.sty is very useful if you need conditional
+% compilation based on whether the output is pdf or dvi.
+% usage:
+% \ifpdf
+%   % pdf code
+% \else
+%   % dvi code
+% \fi
+% The latest version of ifpdf.sty can be obtained from:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/oberdiek/
+% Also, note that IEEEtran.cls V1.7 and later provides a builtin
+% \ifCLASSINFOpdf conditional that works the same way.
+% When switching from latex to pdflatex and vice-versa, the compiler may
+% have to be run twice to clear warning/error messages.
+
+
+
+
+
+
+% *** CITATION PACKAGES ***
+%
+\ifCLASSOPTIONcompsoc
+  % IEEE Computer Society needs nocompress option
+  % requires cite.sty v4.0 or later (November 2003)
+%  \usepackage[nocompress]{cite}
+\else
+  % normal IEEE
+  
+\fi
+% cite.sty was written by Donald Arseneau
+% V1.6 and later of IEEEtran pre-defines the format of the cite.sty package
+% \citet{} output to follow that of IEEE. Loading the cite package will
+% result in citation numbers being automatically sorted and properly
+% "compressed/ranged". e.g., [1], [9], [2], [7], [5], [6] without using
+% cite.sty will become [1], [2], [5]--[7], [9] using cite.sty. cite.sty's
+% \citet will automatically add leading space, if needed. Use cite.sty's
+% noadjust option (cite.sty V3.8 and later) if you want to turn this off
+% such as if a citation ever needs to be enclosed in parenthesis.
+% cite.sty is already installed on most LaTeX systems. Be sure and use
+% version 5.0 (2009-03-20) and later if using hyperref.sty.
+% The latest version can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/cite/
+% The documentation is contained in the cite.sty file itself.
+%
+% Note that some packages require special options to format as the Computer
+% Society requires. In particular, Computer Society  papers do not use
+% compressed citation ranges as is done in typical IEEE papers
+% (e.g., [1]-[4]). Instead, they list every citation separately in order
+% (e.g., [1], [2], [3], [4]). To get the latter we need to load the cite
+% package with the nocompress option which is supported by cite.sty v4.0
+% and later.
+
+
+
+
+
+% *** GRAPHICS RELATED PACKAGES ***
+%
+\ifCLASSINFOpdf
+  % \usepackage[pdftex]{graphicx}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../pdf/}{../jpeg/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+\else
+  % or other class option (dvipsone, dvipdf, if not using dvips). graphicx
+  % will default to the driver specified in the system graphics.cfg if no
+  % driver is specified.
+  % \usepackage[dvips]{graphicx}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../eps/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.eps}
+\fi
+% graphicx was written by David Carlisle and Sebastian Rahtz. It is
+% required if you want graphics, photos, etc. graphicx.sty is already
+% installed on most LaTeX systems. The latest version and documentation
+% can be obtained at: 
+% http://www.ctan.org/tex-archive/macros/latex/required/graphics/
+% Another good source of documentation is "Using Imported Graphics in
+% LaTeX2e" by Keith Reckdahl which can be found at:
+% http://www.ctan.org/tex-archive/info/epslatex/
+%
+% latex, and pdflatex in dvi mode, support graphics in encapsulated
+% postscript (.eps) format. pdflatex in pdf mode supports graphics
+% in .pdf, .jpeg, .png and .mps (metapost) formats. Users should ensure
+% that all non-photo figures use a vector format (.eps, .pdf, .mps) and
+% not a bitmapped formats (.jpeg, .png). IEEE frowns on bitmapped formats
+% which can result in "jaggedy"/blurry rendering of lines and letters as
+% well as large increases in file sizes.
+%
+% You can find documentation about the pdfTeX application at:
+% http://www.tug.org/applications/pdftex
+
+
+
+
+
+% *** MATH PACKAGES ***
+%
+%\usepackage[cmex10]{amsmath}
+% A popular package from the American Mathematical Society that provides
+% many useful and powerful commands for dealing with mathematics. If using
+% it, be sure to load this package with the cmex10 option to ensure that
+% only type 1 fonts will utilized at all point sizes. Without this option,
+% it is possible that some math symbols, particularly those within
+% footnotes, will be rendered in bitmap form which will result in a
+% document that can not be IEEE Xplore compliant!
+%
+% Also, note that the amsmath package sets \interdisplaylinepenalty to 10000
+% thus preventing page breaks from occurring within multiline equations. Use:
+%\interdisplaylinepenalty=2500
+% after loading amsmath to restore such page breaks as IEEEtran.cls normally
+% does. amsmath.sty is already installed on most LaTeX systems. The latest
+% version and documentation can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/required/amslatex/math/
+
+
+
+
+
+% *** SPECIALIZED LIST PACKAGES ***
+%
+%\usepackage{algorithmic}
+% algorithmic.sty was written by Peter Williams and Rogerio Brito.
+% This package provides an algorithmic environment fo describing algorithms.
+% You can use the algorithmic environment in-text or within a figure
+% environment to provide for a floating algorithm. Do NOT use the algorithm
+% floating environment provided by algorithm.sty (by the same authors) or
+% algorithm2e.sty (by Christophe Fiorio) as IEEE does not use dedicated
+% algorithm float types and packages that provide these will not provide
+% correct IEEE style captions. The latest version and documentation of
+% algorithmic.sty can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/algorithms/
+% There is also a support site at:
+% http://algorithms.berlios.de/index.html
+% Also of interest may be the (relatively newer and more customizable)
+% algorithmicx.sty package by Szasz Janos:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/algorithmicx/
+
+
+
+
+% *** ALIGNMENT PACKAGES ***
+%
+%\usepackage{array}
+% Frank Mittelbach's and David Carlisle's array.sty patches and improves
+% the standard LaTeX2e array and tabular environments to provide better
+% appearance and additional user controls. As the default LaTeX2e table
+% generation code is lacking to the point of almost being broken with
+% respect to the quality of the end results, all users are strongly
+% advised to use an enhanced (at the very least that provided by array.sty)
+% set of table tools. array.sty is already installed on most systems. The
+% latest version and documentation can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/required/tools/
+
+
+% IEEEtran contains the IEEEeqnarray family of commands that can be used to
+% generate multiline equations as well as matrices, tables, etc., of high
+% quality.
+
+
+
+
+% *** SUBFIGURE PACKAGES ***
+%\ifCLASSOPTIONcompsoc
+%  \usepackage[caption=false,font=footnotesize,labelfont=sf,textfont=sf]{subfig}
+%\else
+%  \usepackage[caption=false,font=footnotesize]{subfig}
+%\fi
+% subfig.sty, written by Steven Douglas Cochran, is the modern replacement
+% for subfigure.sty, the latter of which is no longer maintained and is
+% incompatible with some LaTeX packages including fixltx2e. However,
+% subfig.sty requires and automatically loads Axel Sommerfeldt's caption.sty
+% which will override IEEEtran.cls' handling of captions and this will result
+% in non-IEEE style figure/table captions. To prevent this problem, be sure
+% and invoke subfig.sty's "caption=false" package option (available since
+% subfig.sty version 1.3, 2005/06/28) as this is will preserve IEEEtran.cls
+% handling of captions.
+% Note that the Computer Society format requires a sans serif font rather
+% than the serif font used in traditional IEEE formatting and thus the need
+% to invoke different subfig.sty package options depending on whether
+% compsoc mode has been enabled.
+%
+% The latest version and documentation of subfig.sty can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/subfig/
+
+
+
+
+% *** FLOAT PACKAGES ***
+%
+%\usepackage{fixltx2e}
+% fixltx2e, the successor to the earlier fix2col.sty, was written by
+% Frank Mittelbach and David Carlisle. This package corrects a few problems
+% in the LaTeX2e kernel, the most notable of which is that in current
+% LaTeX2e releases, the ordering of single and double column floats is not
+% guaranteed to be preserved. Thus, an unpatched LaTeX2e can allow a
+% single column figure to be placed prior to an earlier double column
+% figure. The latest version and documentation can be found at:
+% http://www.ctan.org/tex-archive/macros/latex/base/
+
+
+%\usepackage{stfloats}
+% stfloats.sty was written by Sigitas Tolusis. This package gives LaTeX2e
+% the ability to do double column floats at the bottom of the page as well
+% as the top. (e.g., "\begin{figure*}[!b]" is not normally possible in
+% LaTeX2e). It also provides a command:
+%\fnbelowfloat
+% to enable the placement of footnotes below bottom floats (the standard
+% LaTeX2e kernel puts them above bottom floats). This is an invasive package
+% which rewrites many portions of the LaTeX2e float routines. It may not work
+% with other packages that modify the LaTeX2e float routines. The latest
+% version and documentation can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/sttools/
+% Do not use the stfloats baselinefloat ability as IEEE does not allow
+% \baselineskip to stretch. Authors submitting work to the IEEE should note
+% that IEEE rarely uses double column equations and that authors should try
+% to avoid such use. Do not be tempted to use the cuted.sty or midfloat.sty
+% packages (also by Sigitas Tolusis) as IEEE does not format its papers in
+% such ways.
+% Do not attempt to use stfloats with fixltx2e as they are incompatible.
+% Instead, use Morten Hogholm'a dblfloatfix which combines the features
+% of both fixltx2e and stfloats:
+%
+% \usepackage{dblfloatfix}
+% The latest version can be found at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/dblfloatfix/
+
+
+
+
+% *** PDF, URL AND HYPERLINK PACKAGES ***
+%
+%\usepackage{url}
+% url.sty was written by Donald Arseneau. It provides better support for
+% handling and breaking URLs. url.sty is already installed on most LaTeX
+% systems. The latest version and documentation can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/url/
+% Basically, \url{my_url_here}.
+
+
+
+
+% *** Do not adjust lengths that control margins, column widths, etc. ***
+% *** Do not use packages that alter fonts (such as pslatex).         ***
+% There should be no need to do such things with IEEEtran.cls V1.6 and later.
+% (Unless specifically asked to do so by the journal or conference you plan
+% to submit to, of course. )
+
+% Packages used for adding comments
+\usepackage[portuguese]{babel}
+\selectlanguage{portuguese}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[colorlinks]{hyperref}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[numbers]{natbib} % para \citetauthor{} e outros
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{graphicx}
+
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+
+\begin{document}
+%
+% paper title
+% Titles are generally capitalized except for words such as a, an, and, as,
+% at, but, by, for, in, nor, of, on, or, the, to and up, which are usually
+% not capitalized unless they are the first or last word of the title.
+% Linebreaks \\ can be used within to get better formatting as desired.
+% Do not put math or special symbols in the title.
+\title{Análise da Correlação de Circutos Integrados por meio de\\ \textit{Clustering} de Acordo com Volume de Importações}
+
+% author names and affiliations
+% use a multiple column layout for up to three different
+% affiliations
+\author{\IEEEauthorblockN{Sandro Leite Furtado}
+\IEEEauthorblockA{Mestrado em Computação Aplicada\\
+Universidade de Brasília\\
+Brasília DF, 70910-900, Brasil\\
+Email: sandroleitefurtado@gmail.com}
+\and
+\IEEEauthorblockN{Tiago Pereira Vidigal}
+\IEEEauthorblockA{Mestrado em Computação Aplicada\\
+Universidade de Brasília\\
+Brasília DF, 70910-900, Brasil\\
+Email: tiago.vidigal@aluno.unb.br}
+\and
+\IEEEauthorblockN{William Oliveira Camelo}
+\IEEEauthorblockA{Mestrado em Computação Aplicada\\
+Universidade de Brasília\\
+Brasília DF, 70910-900, Brasil\\
+Email: }
+}
+
+
+% conference papers do not typically use \thanks and this command
+% is locked out in conference mode. If really needed, such as for
+% the acknowledgment of grants, issue a \IEEEoverridecommandlockouts
+% after \documentclass
+
+% for over three affiliations, or if they all won't fit within the width
+% of the page (and note that there is less available width in this regard for
+% compsoc conferences compared to traditional conferences), use this
+% alternative format:
+% 
+%\author{\IEEEauthorblockN{Michael Shell\IEEEauthorrefmark{1},
+%Homer Simpson\IEEEauthorrefmark{2},
+%James Kirk\IEEEauthorrefmark{3}, 
+%Montgomery Scott\IEEEauthorrefmark{3} and
+%Eldon Tyrell\IEEEauthorrefmark{4}}
+%\IEEEauthorblockA{\IEEEauthorrefmark{1}School of Electrical and Computer Engineering\\
+%Georgia Institute of Technology,
+%Atlanta, Georgia 30332--0250\\ Email: see http://www.michaelshell.org/contact.html}
+%\IEEEauthorblockA{\IEEEauthorrefmark{2}Twentieth Century Fox, Springfield, USA\\
+%Email: homer@thesimpsons.com}
+%\IEEEauthorblockA{\IEEEauthorrefmark{3}Starfleet Academy, San Francisco, California 96678-2391\\
+%Telephone: (800) 555--1212, Fax: (888) 555--1212}
+%\IEEEauthorblockA{\IEEEauthorrefmark{4}Tyrell Inc., 123 Replicant Street, Los Angeles, California 90210--4321}}
+
+
+
+
+% use for special paper notices
+%\IEEEspecialpapernotice{(Invited Paper)}
+
+
+
+
+% make the title area
+\maketitle
+
+% As a general rule, do not put math, special symbols or citations
+% in the abstract
+
+\begin{abstract}
+The abstract goes here.
+\end{abstract}
+
+
+% keywords
+
+
+
+
+% For peer review papers, you can put extra information on the cover
+% page as needed:
+% \ifCLASSOPTIONpeerreview
+% \begin{center} \bfseries EDICS Category: 3-BBND \end{center}
+% \fi
+%
+% For peerreview papers, this IEEEtran command inserts a page break and
+% creates the second title. It will be ignored for other modes.
+\IEEEpeerreviewmaketitle
+
+
+
+\section{Introdução} \label{sec_intro}
+% no \IEEEPARstart
+% You must have at least 2 lines in the paragraph with the drop letter
+% (should never be an issue)
+
+%\subsection{Subsection Heading Here}
+%Subsection text here.
+%\subsubsection{Subsubsection Heading Here}
+%Subsubsection text here.
+
+% An example of a floating figure using the graphicx package.
+% Note that \label must occur AFTER (or within) \caption.
+% For figures, \caption should occur after the \includegraphics.
+% Note that IEEEtran v1.7 and later has special internal code that
+% is designed to preserve the operation of \label within \caption
+% even when the captionsoff option is in effect. However, because
+% of issues like this, it may be the safest practice to put all your
+% \label just after \caption rather than within \caption{}.
+%
+% Reminder: the "draftcls" or "draftclsnofoot", not "draft", class
+% option should be used if it is desired that the figures are to be
+% displayed while in draft mode.
+%
+%\begin{figure}[!t]
+%\centering
+%\includegraphics[width=2.5in]{myfigure}
+% where an .eps filename suffix will be assumed under latex, 
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+%\caption{Simulation results for the network.}
+%\label{fig_sim}
+%\end{figure}
+% Note that IEEE typically puts floats only at the top, even when this
+% results in a large percentage of a column being occupied by floats.
+% An example of a double column floating figure using two subfigures.
+% (The subfig.sty package must be loaded for this to work.)
+% The subfigure \label commands are set within each subfloat command,
+% and the \label for the overall figure must come after \caption.
+% \hfil is used as a separator to get equal spacing.
+% Watch out that the combined width of all the subfigures on a 
+% line do not exceed the text width or a line break will occur.
+%
+%\begin{figure*}[!t]
+%\centering
+%\subfloat[Case I]{\includegraphics[width=2.5in]{box}%
+%\label{fig_first_case}}
+%\hfil
+%\subfloat[Case II]{\includegraphics[width=2.5in]{box}%
+%\label{fig_second_case}}
+%\caption{Simulation results for the network.}
+%\label{fig_sim}
+%\end{figure*}
+%
+% Note that often IEEE papers with subfigures do not employ subfigure
+% captions (using the optional argument to \subfloat[]), but instead will
+% reference/describe all of them (a), (b), etc., within the main caption.
+% Be aware that for subfig.sty to generate the (a), (b), etc., subfigure
+% labels, the optional argument to \subfloat must be present. If a
+% subcaption is not desired, just leave its contents blank,
+% e.g., \subfloat[].
+% An example of a floating table. Note that, for IEEE style tables, the
+% \caption command should come BEFORE the table and, given that table
+% captions serve much like titles, are usually capitalized except for words
+% such as a, an, and, as, at, but, by, for, in, nor, of, on, or, the, to
+% and up, which are usually not capitalized unless they are the first or
+% last word of the caption. Table text will default to \footnotesize as
+% IEEE normally uses this smaller font for tables.
+% The \label must come after \caption as always.
+%
+%\begin{table}[!t]
+%% increase table row spacing, adjust to taste
+%\renewcommand{\arraystretch}{1.3}
+% if using array.sty, it might be a good idea to tweak the value of
+% \extrarowheight as needed to properly center the text within the cells
+%\caption{An Example of a Table}
+%\label{table_example}
+%\centering
+%% Some packages, such as MDW tools, offer better commands for making tables
+%% than the plain LaTeX2e tabular which is used here.
+%\begin{tabular}{|c||c|}
+%\hline
+%One & Two\\
+%\hline
+%Three & Four\\
+%\hline
+%\end{tabular}
+%\end{table}
+% Note that the IEEE does not put floats in the very first column
+% - or typically anywhere on the first page for that matter. Also,
+% in-text middle ("here") positioning is typically not used, but it
+% is allowed and encouraged for Computer Society conferences (but
+% not Computer Society journals). Most IEEE journals/conferences use
+% top floats exclusively. 
+% Note that, LaTeX2e, unlike IEEE journals/conferences, places
+% footnotes above bottom floats. This can be corrected via the
+% \fnbelowfloat command of the stfloats package.
+A facilidade de se coletar e armazenar dados gerou a necessidade de analisá-los, de acordo com \citet{han_data_2011}. A mineração de dados é o processo de descoberta de padrões significativos de dados e pode ser usado para essa análise como destaca \citet{witten_data_2005}. Essa abordagem permite o levantamento de informações relevantes para tomadores de decisão fazerem escolhas baseadas em dados.
+
+Chipus Microeletrônica é uma empresa privada brasileira que atua como \textit{Design House} no setor de Semicondutores e possui o interesse de aumentar o número de projetos de produto, como o desenvolvimento de \textit{Application Specific Integrated Circuits} (ASICs). Esse interesse estratégico visa aumentar o potencial ganho constante que esse tipo de projeto fornece em contraste com projetos de serviço. A definição de quais sistemas possuem uma maior chance de sucesso é desafiadora, mas fornece informações valiosas para atingir os objetivos de negócio.
+
+O aumento de projetos de produto pode ser viabilizado mapeando oportunidades de mercado para a plataforma ICX da Chipus, um conjunto configurável por camada de metal de \textit{Intellectual Properties} (IPs) digitais e analógicos \cite{datasheet_icx}. Um único produto capaz de juntar vários componentes clássicos de forma rápida e barata se torna muito chamativo para empresas importando múltiplos circuitos integrados para seus projetos. No entanto, sua efetividade depende que o ICX contenha os circuitos necessários para o cliente com o mínimo de excesso possível por questões de custo, área e consumo.
+
+O objetivo deste trabalho é mapear grupos de \textit{Integrated Circuits} (ICs) que são comumente utilizados juntos. Isso pode ser estimado pelo volume de importações de cada circuito, informação amplamente disponível para o Brasil e outros países. A geração de \textit{clusters} de acordo com tendências de importação permitirá a definição de diferentes versões da plataforma ICX da Chipus que tenham maior chance de impacto no mercado.
+
+A divisão do trabalho é conforme segue: na seção \ref{sec_rev} é apresentada a revisão da literatura sobre o tema apresentando conceitos utilizados na concepção e trabalhos correlatos. Na seção \ref{sec_metod} é apresentada a metodologia adotada para o desenvolvimento deste trabalho, a seção \ref{sec_result} apresenta os resultados encontrados e finaliza-se com a seção \ref{sec_concl} concluindo os achados.
+
+\section{Revisão de Literatura}\label{sec_rev}
+Essa seção apresentará a revisão de literatura do estado da arte relacionado ao escopo deste trabalho. Primeiro será apresentada uma visão geral sobre \textit{Data Mining}, em seguida sobre a técnica escolhida e por fim sobre o escopo negocial a ser analizado.
+
+\subsection{\textit{Data Mining}}
+\textit{Data Mining}, ou a mineração de dados em português, pode ser entendida como um processo de descoberta de informações estratégicas para predição de futuros comportamentos e, de acordo com \citet{witten_data_2005} é a extração implícita, previamente desconhecida, e potencialmente utilizável de informações sobre dados. 
+
+Para uma empresa, a aprendizagem dos dados já existentes em bancos de dados, textos ou processos pode ser considerada vantajosa no âmbito da competitividade, de acordo \citet{thuraisingham_data_1998} uma vez que informações estratégicas, para tomada de decisão, sejam geradas.
+
+\subsection{Clusterização}
+A clusterização é uma técnica para classificação de dados que pode ser usada quando se tem um volume grande e pouco conhecimento sobre eles \cite{reviewcluster}. A técnica de mineração coloca dados relacionados ou homogêneos em grupos sem conhecimento avançado dos grupos, essa abordagem é conhecida como clássica (crisp), uma vez que seus elementos estão contidos em uma única classe. \cite{Rai2010cluster}.
+
+\subsubsection{\textit{Time-Series}}
+Segundo \citet{Antunes2001TemporalDM} uma sequencia temporal ou \textit{time-series}, em inglês, é um tipo de clusterização para uma sequência de elementos contínuos de valor real.
+
+\subsubsection{\textit{Fuzzy}}
+A abordagem fuzzy difere da abordagem clássica de clusterização, uma vez que um elemento pode pertencer a várias classes e assumir valores variados \cite{fuzzySC2002}.
+
+Segundo \citet{bezdek_tsao_pal}, uma abordagem clássica, por vezes pode ser muito restritiva e inviável, uma vez que pode levar a imprecisão e incompletude dos dados. Essa imprecisão pode ocorrer por diferentes fatores, tais como, erros em instrumentos ou ruídos na amostra de dados podem levar, de forma parcial, a valores não confiáveis de determinados atributos.
+
+Nesse sentido, é adequado o uso da Teoria de Conjuntos Fuzzy (TCF) para representar valores imprecisos. Nessa abordagem utilizam-se variáveis linguísticas e restrições para descrever os valores de atributos, ao contrário de fornecer uma representação numérica exata aos dados com valores incertos dos atributos \cite{fuzzySC2002}.
+
+\subsubsection{\textit{Hierarchical clustering}}
+
+Essa abordagem atua agrupando atributos de dados (séries temporais) em uma árvore de clusters. São diferenciados dois tipos de métodos de agrupamento hierárquico, sendo eles: aglomerativo e divisivo. 
+
+O método de agrupamento hierárquico aglomerativo atribui a cada objeto um cluster próprio, a partir disso, mescla esses clusters menores em clusters cada vez maiores, de modo a se criar um cluster ainda maior e que contenha a representação de todos os objetos e as condições sejam satisfeitas. Cabe destacar que o método aglomerativo é mais usado que o divisivo em geral.
+
+\subsection{Circuitos Integrados}
+
+Circuito integrado é um conjunto de componentes ativos e passivos interconectados para implementar um sistema eletrônico em escala micrométrica. O crescimento de complexidade destes sistemas tem crescido de forma acelerada ao longo dos anos, requerendo modularização e integração de blocos de circuito específicos. Isso se assemelha ao que ocorreu com sistemas em software.
+
+A modularização de circuitos proporcionou o desenvolvimento de IPs, sistemas autocontidos que podem ser vendidos para reuso em sistemas distintos. A compra de IPs prontos ao invés do desenvolvimento é uma recorrente tomada de decisão a ser feita em projetos de hardware dado o custo de desenvolvimento e manufatura. Usualmente, múltiplos blocos independentes são integrados para cada produto, potencialmente requerendo lidar com diferentes fornecedores.
+
+\subsection{CRISP-DM}
+A mineração de dados é um processo interativo e iterativo em que muitos passos precisam ser repetidamente refinados, a fim de proporcionar uma solução adequada para o problema de análise de dados, de acordo com \citet{wang_data_2008}. O padrão de mineração utilizado neste trabalho será o CRISP-DM (\textit{Cross Industry Standard Process for Data Mining}). Este modelo define um processo que reflete o ciclo de vida de um projeto de mineração, formado por seis fases, são elas: entendimento do negócio, além do entendimento, preparação e modelagem dos dados, finalizando como sua avaliação e implementação. \citet{kononenko_machine_2007} identifica que os relacionamentos entre essas fases são ciclicamente iterativas até que algum objetivo desejado seja alcançado. 
+
+O entendimento do negócio visa o esclarecimento do contexto, objetivos comerciais da empresa e objetivos da mineração de dados. O entendimento dos dados consiste em uma primeira coleta e avaliação do dado disponível, seguido pela sua preparação que consiste em selecionar, limpar, construir e integrar. Por fim, a modelagem e seu respectivo teste permite a avaliação e revisão dos resultados, embasando o processo de implementação para transformar as descobertas obtidas em ações de melhoria para a empresa \cite{guia_crisp_dm}.
+
+\subsection{Trabalhos Correlatos}
+
+\citet{DUrso2013} abordou a classificação de séries temporais utilizando fuzzy, no contexto financeiro. Neste trabalho foram propostos dois modelos de agrupamento fuzzy baseados em modelos GARCH. Na adequação das medidas de distância para o primeiro modelo \citet{DUrso2013} utilizou a métrica autorregressiva clássica. O segundo utilizou a distância de Caiado, uma distância do tipo Mahalanobis, baseada em parâmetros GARCH estimados e covariâncias que levaram em consideração as informações sobre a estrutura de volatilidade das séries temporais. O trabalho apresenta uma aplicação ao problema de classificação de 29 séries temporais de taxas de câmbio do euro em relação às moedas internacionais e identificou três clusters de taxas de câmbio do Euro, caracterizados por diferentes níveis de estabilidade em termos de flutuações da volatilidade condicional. O trabalhou concluiu que existe uma sugestão de que o uso da distância de Caiado ajuda a descobrir a imprecisão da estrutura do grupo. Os resultados do trabalho mostraram que os clusterings propostos são capazes de revelar características importantes das séries temporais analisadas e detectaram padrões ocultos em grandes amostras de séries temporais financeiras.
+
+
+
+\section{Metodologia}\label{sec_metod}
+
+A metodologia seguida neste trabalho é baseada no \textit{CRISM-DM} \cite{guia_crisp_dm}. O entendimento de negócios resumido foi consolidado na seção \ref{sec_intro}, enquanto as demais fases intermediárias são descritas nesta seção. A fase final de implementação foge do escopo deste artigo.
+
+\subsection{Entendimento dos Dados}
+
+Os dados de importação iniciais estão disponíveis na base de dados da Receita Federal do Brasil. Os campos dos dados obtidos são listados e uma primeira exploração deles levantar as primeiras impressões. O mapeando problemas de formatação e inconsistências a serem tratadas deve ser realizado e registrado para guiar a preparação dos dados.
+
+Importações de outros países podem fornecer informações interessantes, tornando valioso o entendimento desses dados. Demais países do Mercosul são candidatos naturais dada as similaridades, porém integrantes da União Europeia (EU) e dos Estados Unidos (USA) também podem ser usados. A diversificação de países auxilia na redução de particularidades nacionais e aumenta a quantidade de dados que podem ser usados na mineração.
+
+\subsection{Preparação dos Dados}
+
+Circuitos integrados em trocas internacionais são registrados por códigos de prefixo 8542 como definido pelo padrão de nomenclatura internacional \textit{Harmonized System} (HS) \cite{standard_hs}. Esse código pode ser usado para selecionar apenas os registros de interesse dos dados de importação. Essa filtragem pode ser repetida para todos os países sendo analisados.
+
+Os dados selecionados são limpos para resolver quaisquer problemas de qualidade levantados e nenhum dado novo precisará ser construído uma vez que apenas o volume de importações será analisado. A integração dos dados será necessária caso múltiplos países sejam analisados, requerendo padronizar o nome dos campos e a formatação dos dados nos registros.
+
+Os países, apesar de seguirem o padrão HS, geralmente possuem uma nomenclatura derivada com subcategorias para maior especificidade dos produtos. Países do Mercosul, como o Brasil, seguem a Nomenclatura Comum do Mercosul (NCM) \cite{standard_ncm}, países da EU pelo padrão \textit{Combined Nomenclature} (CN) \cite{standard_cn} e USA pelo padrão \textit{Schedule B} \cite{standard_scheduleb}. Uma vez que as subcategorias entre esses vários padrões não é correspondente, a modelagem deve ser feita por conjuntos de países com nomenclaturas idênticas.
+
+\subsection{Modelagem}
+
+Os grupos de circuitos integrados mais utilizados juntos podem ser determinados com as tendências de importação, que é uma série temporal de dados de mesmo tamanho. Estes componentes não precisam ser exclusivos de apenas um grupo, uma vez que é comum circuitos clássicos estarem presentes em várias aplicações distintas. Com isso, \textit{fuzzy time-series clustering} é uma modelagem compatível com a análise proposta \cite{reviewcluster}.
+
+O teste dos resultados do modelo serão feitos com um subconjunto dos dados tratados. O critério de excelência é definido pela taxa de erro do modelo usando métodos de medida de similaridade para geração de métricas simples e estáveis \cite{reviewcluster}. A distancia euclidiana é uma solução clássica e pode ser usada diretamente, mas outro métodos podem ser associados para maior precisão, como correlação cruzada \cite{liaosurvey}.
+
+\subsection{Avaliação}
+
+As iterações com diferentes configurações do modelo e algoritmos cria diferentes conjuntos de soluções, cada um com um número distinto de \textit{clusters} e composição de circuitos. Essas informações levantadas podem gerar descobertas que devem ser registradas.
+
+As soluções e descobertas devem ser avaliadas considerando os objetivos de negócios junto a um especialista. Uma revisão dessas informações evidencia êxitos e levanta pontos a serem melhorados, podendo inclusive gerar uma nova iteração da mineração a fim de refinar dados e/ou modelo. A mineração pode ser concluída apenas ao atingir os objetivos de negócio.
+
+\section{Resultados}\label{sec_result}
+
+To be done.
+
+\section{Conclusão} \label{sec_concl}
+
+To be done.
+
+
+% conference papers do not normally have an appendix
+
+
+
+% trigger a \newpage just before the given reference
+% number - used to balance the columns on the last page
+% adjust value as needed - may need to be readjusted if
+% the document is modified later
+%\IEEEtriggeratref{8}
+% The "triggered" command can be changed if desired:
+%\IEEEtriggercmd{\enlargethispage{-5in}}
+
+% referencia section
+
+% can use a bibliography generated by BibTeX as a .bbl file
+% BibTeX documentation can be easily obtained at:
+% http://www.ctan.org/tex-archive/biblio/bibtex/contrib/doc/
+% The IEEEtran BibTeX style support page is at:
+% http://www.michaelshell.org/tex/ieeetran/bibtex/
+%\bibliographystyle{IEEEtran}
+% argument is your BibTeX string definitions and bibliography database(s)
+%\bibliography{IEEEabrv,../bib/paper}
+%
+% <OR> manually copy in the resultant .bbl file
+% set second argument of \begin to the number of references
+% (used to reserve space for the reference number labels box)
+
+\bibliographystyle{IEEEtranN}
+\bibliography{referencias.bib}
+
+
+% that's all folks
+\end{document}
