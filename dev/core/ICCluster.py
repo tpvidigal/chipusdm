@@ -105,6 +105,9 @@ class ICCluster(ABC):
         # - Percentage FP = 100 * FP / (FP + TN), where FP = False Positive, TN = True Negative
         return None
 
+    def get_model(self):
+        return self._model
+
     def get_cross_validation(self):
         return self._cv
 
