@@ -11,35 +11,13 @@ class ICImport(ABC):
     def __init__(self, df=None, path=None):
         if df is None:
             if path is not None:
-                df = pd.read_csv(path, sep=';', engine='c', dtype={'CO_NCM': str})
+                df = self._get_data_from_file(path)
 
         self._import_source = '<?>'
         self._code_dict = self.get_code_dict()
         self._df_orig = df
         self._df = self._prepare_data()
         self._df_norm = self._normalize_date()
-
-    def _prepare_data(self):
-        """
-        Data preparation of original data
-        :return: Dataframe with prepared data
-        """
-        if self._df_orig is None:
-            return None
-
-        # Initial preparation
-        df = self._initial_preparation(self._df_orig)
-
-        # Creating entries with 0 import volume for missing months for each chip
-        df = df.set_index(['DATE', 'CODE'])['VOLUME'].unstack().unstack().reset_index()
-        df = df.rename(columns={0: 'VOLUME'})
-        df.fillna(0, inplace=True)
-
-        # Transposing dates to transform importations into features of each chip
-        df = df.pivot(index='DATE', columns='CODE', values='VOLUME')
-        df.columns.name = None
-
-        return df
 
     def _normalize_date(self):
         """
@@ -59,12 +37,14 @@ class ICImport(ABC):
         return df
 
     @abstractmethod
-    def _initial_preparation(self, df_orig):
+    def _get_data_from_file(self, path):
+        pass
+
+    @abstractmethod
+    def _prepare_data(self):
         """
-        Initial preparation to guarantee a dataframe:
-        - Index: DATE (YYYY-MM)
-        - Columns: CODE, VOLUME
-        :return: Dataframe with standard format
+        Data preparation of original data
+        :return: Dataframe with prepared data
         """
         pass
 
@@ -163,17 +143,6 @@ class ICImportNCM(ICImport):
         '85423999': 'Outros - Outros'
     }
 
-    def __init__(self, df=None, path=None):
-        super().__init__(df, path)
-
-    @abstractmethod
-    def _initial_preparation(self):
-        pass
-
-    @abstractmethod
-    def get_source_name(self):
-        pass
-
     def get_code_dict(self):
         return ICImportNCM.ncm_code
 
@@ -196,10 +165,13 @@ class ICImportNCMBrazil(ICImportNCM):
         super().__init__(df, path)
         self._import_source = 'Brazil'
 
-    def _initial_preparation(self, df_orig):
+    def _get_data_from_file(self, path):
+        return pd.read_csv(path, sep=';', engine='c', dtype={'CO_NCM': str, 'CO_ANO': int})
+
+    def _prepare_data(self):
 
         # Select only integrated circuits from 2016 to now
-        df = df_orig.loc[lambda row: row['CO_NCM'].isin(self._code_dict)]
+        df = self._df_orig.loc[lambda row: row['CO_NCM'].isin(self._code_dict)]
         df = df[lambda row: row['CO_ANO'] >= 2016]
 
         # Sum total import volume per month
@@ -212,6 +184,15 @@ class ICImportNCMBrazil(ICImportNCM):
         # Remove non-required columns
         df = df.loc[:, ['CO_NCM', 'QT_ESTAT', 'DATE']]
         df.rename(columns={'CO_NCM': 'CODE', 'QT_ESTAT': 'VOLUME'}, inplace=True)
+
+        # Creating entries with 0 import volume for missing months for each chip
+        df = df.set_index(['DATE', 'CODE'])['VOLUME'].unstack().unstack().reset_index()
+        df = df.rename(columns={0: 'VOLUME'})
+        df.fillna(0, inplace=True)
+
+        # Transposing dates to transform importations into features of each chip
+        df = df.pivot(index='DATE', columns='CODE', values='VOLUME')
+        df.columns.name = None
 
         return df
 
