@@ -1,4 +1,4 @@
-from core.ICValidation import ICValidation
+from ICCluster.ICValidation import ICValidation
 import skfuzzy as fuzz
 import numpy as np
 import pandas as pd
