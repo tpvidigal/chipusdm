@@ -23,6 +23,22 @@ class ICCluster(ABC):
             self._model = self._generate_model(icimport, self._num_clusters)
             self._cv = self._cross_validation(icimport, self._num_clusters)
 
+    def __str__(self):
+        cv_dict = self._cv.get_validity_dict()
+        idx = 0
+        text = "Country: " + self._icimport.get_country() + '\n'
+        text += "\t-> Code:   " + self._icimport.get_code_standard() + '\n'
+        text += "\t-> Source: " + self._icimport.get_source() + '\n'
+        text += "\t-> Validity:\n"
+        for valid in cv_dict:
+            text += "\t\t" + valid + ": " + str(cv_dict[valid][0]) + " +- " + str(cv_dict[valid][1]) + '\n'
+        for cluster in self.get_clusters():
+            text += "\t-> Cluster "+str(idx)+":" + '\n'
+            for code in cluster:
+                text += "\t\t" + code + " = " + self._icimport.code_description(code) + '\n'
+            idx += 1
+        return text
+
     def _generate_model(self, icimport, num_clusters=None):
         """
         Generate a clustering model

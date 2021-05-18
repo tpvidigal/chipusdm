@@ -9,4 +9,14 @@ class ICImportBrazil(ICImportNCM, ICImportTradeMap):
 
     def __init__(self, df=None, path=None):
         super().__init__(df, path)
-        self._import_source = 'Brazil'
+        self._country = 'Brazil'
+
+
+class ICImportParaguay(ICImportNCM, ICImportTradeMap):
+    """
+    Class for IC imports of Paraguay
+    """
+
+    def __init__(self, df=None, path=None):
+        super().__init__(df, path)
+        self._country = 'Paraguay'

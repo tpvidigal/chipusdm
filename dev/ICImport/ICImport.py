@@ -12,11 +12,20 @@ class ICImport(ABC):
             if path is not None:
                 df = self._get_data_from_file(path)
 
-        self._import_source = '<?>'
+        self._country = '<?>'
+        self._source = '?'
+        self._code = '?'
         self._code_dict = self.get_code_dict()
         self._df_orig = df
         self._df = self._prepare_data()
         self._df_norm = self._normalize_data()
+
+    def __str__(self):
+        text = "Country: " + self.get_country() + '\n'
+        text += "Code:   " + self.get_code_standard() + '\n'
+        text += "Source: " + self.get_source() + '\n'
+        text += self._df.to_string() + '\n'
+        return text
 
     def _normalize_data(self):
         if self._df is None:
@@ -42,6 +51,15 @@ class ICImport(ABC):
         :return: Dataframe with prepared data
         """
         pass
+
+    def get_country(self):
+        return self._country
+
+    def get_source(self):
+        return self._source
+
+    def get_code_standard(self):
+        return self._code
 
     def get_data(self):
         """
@@ -78,9 +96,9 @@ class ICImport(ABC):
         """
         if self._df is not None:
             ax = self._df.plot(figsize=(8, 6))
-            ax.set_title('IC Importations in ' + self._import_source)
+            ax.set_title('IC Importations by '+self._code+' code in ' + self._country + ' ('+self._source+')')
             ax.set_xlabel('Date')
-            ax.set_ylabel('Volume of imports')
+            ax.set_ylabel('Volume of imports (kilograms)')
             plt.legend(bbox_to_anchor=(1.02, 1.05), loc='upper left', borderaxespad=0.)
             plt.subplots_adjust(left=0.1, bottom=0.1, right=0.8, top=0.9)
             return ax
@@ -92,7 +110,7 @@ class ICImport(ABC):
         """
         if self._df is not None:
             ax = self._df_norm.plot(figsize=(8, 6))
-            ax.set_title(self._import_source)
+            ax.set_title(self._country)
             ax.set_xlabel('Date')
             ax.set_ylabel('Volume of imports (normalized)')
             plt.legend(bbox_to_anchor=(1.02, 1.05), loc='upper left', borderaxespad=0.)

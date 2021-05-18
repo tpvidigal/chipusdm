@@ -10,6 +10,10 @@ class ICImportReceitaFederal(ICImport, ABC):
     Abstract class for IC imports with data from 'Receita Federal' of Brazil
     """
 
+    def __init__(self, df=None, path=None):
+        super().__init__(df, path)
+        self._source = 'Receita Federal'
+
     def _get_data_from_file(self, path):
         return pd.read_csv(path, sep=';', engine='c', dtype={'CO_NCM': str, 'CO_ANO': int})
 
@@ -46,6 +50,10 @@ class ICImportTradeMap(ICImport, ABC):
     """
     Abstract class for IC imports with data from TradeMap.org
     """
+
+    def __init__(self, df=None, path=None):
+        super().__init__(df, path)
+        self._source = 'TradeMap.org'
 
     def _get_data_from_file(self, path):
         return pd.read_csv(path, sep=';', engine='c', dtype={'CODE': str})

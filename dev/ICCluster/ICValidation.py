@@ -29,3 +29,8 @@ class ICValidation:
 
     def get_fpc(self):
         return self._fpc
+
+    def get_validity_dict(self):
+        return {
+            'FPC': (self._fpc, self._fpc_std)
+        }

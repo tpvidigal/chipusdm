@@ -31,6 +31,10 @@ class ICImportNCM(ICImport, ABC):
         '85423999': 'Outros - Outros'
     }
 
+    def __init__(self, df=None, path=None):
+        super().__init__(df, path)
+        self._code = 'NCM'
+
     def get_code_dict(self):
         return ICImportNCM.ncm_code
 
