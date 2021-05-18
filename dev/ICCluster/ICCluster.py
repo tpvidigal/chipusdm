@@ -71,7 +71,6 @@ class ICCluster(ABC):
             folds[idx % self._num_folds][orig_df.columns[idx]] = orig_df[orig_df.columns[idx]]
 
         # Running cross validations
-        models = []
         results = []
         for test in folds:
 
