@@ -39,9 +39,9 @@ class ICImport(ABC):
             df[ic] = df[ic].apply(lambda x: (x - ic_min) / (ic_max - ic_min))
 
         # Absolute to difference
-        for ic in df:
-            df[ic] = df[ic] - df[ic].shift(1)
-            df[ic] = df[ic].fillna(0)
+        # for ic in df:
+        #     df[ic] = df[ic] - df[ic].shift(1)
+        #     df[ic] = df[ic].fillna(0)
 
         return df
 
