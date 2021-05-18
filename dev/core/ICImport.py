@@ -5,7 +5,7 @@ from abc import ABC, abstractmethod
 
 class ICImport(ABC):
     """
-    Class that encapsulates the IC importations
+    Abstract class that encapsulates the IC importations
     """
 
     def __init__(self, df=None, path=None):
@@ -17,18 +17,14 @@ class ICImport(ABC):
         self._code_dict = self.get_code_dict()
         self._df_orig = df
         self._df = self._prepare_data()
-        self._df_norm = self._normalize_date()
+        self._df_norm = self._normalize_data()
 
-    def _normalize_date(self):
-        """
-        Normalize prepared data
-        :return: Dataframe with normalized prepared data
-        """
+    def _normalize_data(self):
         if self._df is None:
             return None
 
         # Normalizing import volume: Min-Max
-        df = self._df.copy().reset_index().set_index('DATE')
+        df = self._df.copy()
         for ic in df:
             ic_min = df[ic].min()
             ic_max = df[ic].max()
@@ -105,10 +101,6 @@ class ICImport(ABC):
             return ax
 
     @abstractmethod
-    def get_source_name(self):
-        pass
-
-    @abstractmethod
     def get_code_dict(self):
         pass
 
@@ -119,6 +111,9 @@ class ICImport(ABC):
 
 
 class ICImportNCM(ICImport):
+    """
+    Abstract class for IC imports using NCM code
+    """
 
     # NCM codes (since 2016)
     ncm_code = {
@@ -159,11 +154,26 @@ class ICImportNCM(ICImport):
             return "[DEPRECATED OR INVALID CODE]"
 
 
-class ICImportNCMBrazil(ICImportNCM):
+class ICImportTradeMap(ICImport):
+    """
+    Abstract class for IC imports with data from TradeMap.org
+    """
 
-    def __init__(self, df=None, path=None):
-        super().__init__(df, path)
-        self._import_source = 'Brazil'
+    def _get_data_from_file(self, path):
+        return pd.read_csv(path, sep=';', engine='c', dtype={'CODE': str})
+
+    def _prepare_data(self):
+        df = self._df_orig.loc[lambda row: row['CODE'].isin(self._code_dict)]
+        df = df.set_index('CODE')
+        df = df.T
+        df.columns.name = None
+        return df
+
+
+class ICImportReceitaFederal(ICImport):
+    """
+    Abstract class for IC imports with data from 'Receita Federal' of Brazil
+    """
 
     def _get_data_from_file(self, path):
         return pd.read_csv(path, sep=';', engine='c', dtype={'CO_NCM': str, 'CO_ANO': int})
@@ -182,8 +192,8 @@ class ICImportNCMBrazil(ICImportNCM):
                                           "{:02d}".format(row['CO_MES']), axis=1)
 
         # Remove non-required columns
-        df = df.loc[:, ['CO_NCM', 'QT_ESTAT', 'DATE']]
-        df.rename(columns={'CO_NCM': 'CODE', 'QT_ESTAT': 'VOLUME'}, inplace=True)
+        df = df.loc[:, ['CO_NCM', 'KG_LIQUIDO', 'DATE']]
+        df.rename(columns={'CO_NCM': 'CODE', 'KG_LIQUIDO': 'VOLUME'}, inplace=True)
 
         # Creating entries with 0 import volume for missing months for each chip
         df = df.set_index(['DATE', 'CODE'])['VOLUME'].unstack().unstack().reset_index()
@@ -196,5 +206,12 @@ class ICImportNCMBrazil(ICImportNCM):
 
         return df
 
-    def get_source_name(self):
-        return 'Brazil'
+
+class ICImportBrazil(ICImportNCM, ICImportTradeMap):
+    """
+    Class for IC imports of Brazil
+    """
+
+    def __init__(self, df=None, path=None):
+        super().__init__(df, path)
+        self._import_source = 'Brazil'
