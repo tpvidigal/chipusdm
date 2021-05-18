@@ -12,9 +12,10 @@ class ICImport(ABC):
             if path is not None:
                 df = self._get_data_from_file(path)
 
-        self._country = '<?>'
-        self._source = '?'
-        self._code = '?'
+        self._country = '???'
+        self._source = '???'
+        self._code = '???'
+        self._units = '???'
         self._code_dict = self.get_code_dict()
         self._df_orig = df
         self._df = self._prepare_data()
@@ -103,7 +104,7 @@ class ICImport(ABC):
             ax = self._df.plot(figsize=(8, 6))
             ax.set_title('IC Importations by '+self._code+' code in ' + self._country + ' ('+self._source+')')
             ax.set_xlabel('Date')
-            ax.set_ylabel('Volume of imports (kilograms)')
+            ax.set_ylabel('Volume of imports ('+self._units+')')
             plt.legend(bbox_to_anchor=(1.02, 1.05), loc='upper left', borderaxespad=0.)
             plt.subplots_adjust(left=0.1, bottom=0.1, right=0.8, top=0.9)
             return ax

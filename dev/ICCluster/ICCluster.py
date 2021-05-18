@@ -31,11 +31,8 @@ class ICCluster(ABC):
         text += "\t-> Validity:\n"
         for valid in cv_dict:
             text += "\t\t" + valid + ": " + str(cv_dict[valid][0]) + " +- " + str(cv_dict[valid][1]) + '\n'
-        for cluster in self.get_clusters():
-            text += "\t-> Cluster "+str(idx)+":" + '\n'
-            for code in cluster:
-                text += "\t\t" + code + " = " + self._icimport.code_description(code) + '\n'
-            idx += 1
+        text += "\t-> Fuzzy partition:\n"
+        text += self.get_fuzzy_partition().to_string()
         return text
 
     def _generate_model(self, icimport, num_clusters=None):
@@ -145,7 +142,11 @@ class ICCluster(ABC):
         pass
 
     @abstractmethod
-    def get_model_centers(self, model):
+    def get_fuzzy_partition(self):
+        pass
+
+    @abstractmethod
+    def get_model_centers(self):
         pass
 
 

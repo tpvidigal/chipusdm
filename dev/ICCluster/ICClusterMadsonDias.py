@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 from fcmeans import FCM
 
 from ICCluster.ICCluster import ICCluster
@@ -48,5 +49,8 @@ class ICClusterMadsonDias(ICCluster):
         cluster_membership = np.argmax(self._model.u, axis=1)
         return self._get_cluster_members(cluster_membership)
 
-    def get_model_centers(self, model):
-        return model.centers
+    def get_fuzzy_partition(self):
+        return pd.DataFrame(self._model.u.T, columns=self._icimport.get_code_dict().keys())
+
+    def get_model_centers(self):
+        return self._model.centers

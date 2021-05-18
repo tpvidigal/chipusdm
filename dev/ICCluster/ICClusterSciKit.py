@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 import skfuzzy as fuzz
 
 from ICCluster.ICCluster import ICCluster
@@ -48,5 +49,8 @@ class ICClusterSciKit(ICCluster):
         cluster_membership = np.argmax(self._model[1], axis=0)
         return self._get_cluster_members(cluster_membership)
 
-    def get_model_centers(self, model):
-        return model[0]
+    def get_fuzzy_partition(self):
+        return pd.DataFrame(self._model[1], columns=self._icimport.get_code_dict().keys())
+
+    def get_model_centers(self):
+        return self._model[0]

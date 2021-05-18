@@ -13,6 +13,7 @@ class ICImportReceitaFederal(ICImport, ABC):
     def __init__(self, df=None, path=None):
         super().__init__(df, path)
         self._source = 'Receita Federal'
+        self._units = "Units"
 
     def _get_data_from_file(self, path):
         return pd.read_csv(path, sep=';', engine='c', dtype={'CO_NCM': str, 'CO_ANO': int})
@@ -31,8 +32,8 @@ class ICImportReceitaFederal(ICImport, ABC):
                                           "{:02d}".format(row['CO_MES']), axis=1)
 
         # Remove non-required columns
-        df = df.loc[:, ['CO_NCM', 'KG_LIQUIDO', 'DATE']]
-        df.rename(columns={'CO_NCM': 'CODE', 'KG_LIQUIDO': 'VOLUME'}, inplace=True)
+        df = df.loc[:, ['CO_NCM', 'QT_ESTAT', 'DATE']]
+        df.rename(columns={'CO_NCM': 'CODE', 'QT_ESTAT': 'VOLUME'}, inplace=True)
 
         # Creating entries with 0 import volume for missing months for each chip
         df = df.set_index(['DATE', 'CODE'])['VOLUME'].unstack().unstack().reset_index()
@@ -54,6 +55,7 @@ class ICImportTradeMap(ICImport, ABC):
     def __init__(self, df=None, path=None):
         super().__init__(df, path)
         self._source = 'TradeMap.org'
+        self._units = "weight"
 
     def _get_data_from_file(self, path):
         return pd.read_csv(path, sep=';', engine='c', dtype={'CODE': str})
