@@ -1,11 +1,11 @@
 from ICImport.Countries import *
 from ICImport.ICImport import *
-from ICCluster.ICCluster import ICClusterSciKit as ICCluster
+from ICCluster.ICClusterMadsonDias import ICClusterMadsonDias as ICCluster
 
 countries = {
-    # 'brazil': ICImportBrazil,
-    # 'paraguay': ICImportParaguay,
-    # 'uruguay': ICImportUruguay,
+    'brazil': ICImportBrazil,
+    'paraguay': ICImportParaguay,
+    'uruguay': ICImportUruguay,
     'argentina': ICImportArgentina
 }
 

@@ -30,13 +30,18 @@ class ICImport(ABC):
     def _normalize_data(self):
         if self._df is None:
             return None
+        df = self._df.copy()
 
         # Normalizing import volume: Min-Max
-        df = self._df.copy()
         for ic in df:
             ic_min = df[ic].min()
             ic_max = df[ic].max()
             df[ic] = df[ic].apply(lambda x: (x - ic_min) / (ic_max - ic_min))
+
+        # Absolute to difference
+        for ic in df:
+            df[ic] = df[ic] - df[ic].shift(1)
+            df[ic] = df[ic].fillna(0)
 
         return df
 
